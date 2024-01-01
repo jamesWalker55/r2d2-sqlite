@@ -132,7 +132,7 @@ impl r2d2::ManageConnection for SqliteConnectionManager {
     type Connection = Connection;
     type Error = rusqlite::Error;
 
-    fn connect(&self) -> Result<Connection, Error> {
+    fn connect(&self) -> Result<Connection, Self::Error> {
         match self.source {
             Source::File(ref path) => Connection::open_with_flags(path, self.flags),
             Source::Memory(ref id) => {
